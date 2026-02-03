@@ -1,0 +1,217 @@
+@font-face {
+  font-family: "Metropolis";
+  src: url('/metropolis.regular.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Metropolis";
+  src: url('/metropolis.bold.otf') format('opentype');
+  font-weight: 800;
+  font-display: swap;
+}
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@font-face {
+  font-family: "Metropolis";
+  src: url('https://static.eneba.games/fonts/Metropolis-Bold.woff2') format('woff2');
+  font-weight: 800;
+  font-display: swap;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-background: #4618ac;
+  --color-foreground: #ffffff;
+
+  --color-card: #2a0d6e;
+  --color-card-foreground: #ffffff;
+
+  --color-popover: #2a0d6e;
+  --color-popover-foreground: #ffffff;
+
+  --color-primary: #ffdc00;
+  --color-primary-foreground: #000000;
+
+  --color-secondary: #2a0d6e;
+  --color-secondary-foreground: #ffffff;
+
+  --color-muted: #ffffff1a;
+  --color-muted-foreground: #b9a4f1;
+
+  --color-accent: #00d2b4;
+  --color-accent-foreground: #ffffff;
+
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+
+  --color-border: #ffffff1a;
+  --color-input: #ffffff1a;
+  --color-ring: #ffdc00;
+
+  --color-chart-1: #00d2b4;
+  --color-chart-2: #ffdc00;
+  --color-chart-3: #3c139c;
+  --color-chart-4: #2a0d6e;
+  --color-chart-5: #b9a4f1;
+
+  --color-sidebar: #2a0d6e;
+  --color-sidebar-foreground: #b9a4f1;
+  --color-sidebar-primary: #ffdc00;
+  --color-sidebar-primary-foreground: #000000;
+  --color-sidebar-accent: #3c139c;
+  --color-sidebar-accent-foreground: #ffffff;
+  --color-sidebar-border: #ffffff1a;
+  --color-sidebar-ring: #ffdc00;
+
+  --color-bg-primary: #3c139c;
+  --color-bg-secondary: #2a0d6e;
+  --color-text-secondary: #b9a4f1;
+  --color-accent-cyan: #00d2b4;
+  --color-warning-yellow: #ffff00;
+
+  --font-roboto: "Metropolis", sans-serif;
+
+  --radius-lg: 4px;
+  --radius-md: 4px;
+  --radius-sm: 2px;
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: #ffffff1a;
+  }
+}
+
+@layer base {
+  :root {
+    --background: #3c139c;
+    --foreground: #ffffff;
+    --card: #2a0d6e;
+    --card-foreground: #ffffff;
+    --popover: #2a0d6e;
+    --popover-foreground: #ffffff;
+    --primary: #ffdc00;
+    --primary-foreground: #000000;
+    --secondary: #2a0d6e;
+    --secondary-foreground: #ffffff;
+    --muted: #ffffff1a;
+    --muted-foreground: #b9a4f1;
+    --accent: #00d2b4;
+    --accent-foreground: #ffffff;
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    --border: #ffffff1a;
+    --input: #ffffff1a;
+    --ring: #ffdc00;
+    --radius: 4px;
+    --sidebar-background: #2a0d6e;
+    --sidebar-foreground: #b9a4f1;
+    --sidebar-primary: #ffdc00;
+    --sidebar-primary-foreground: #000000;
+    --sidebar-accent: #3c139c;
+    --sidebar-accent-foreground: #ffffff;
+    --sidebar-border: #ffffff1a;
+    --sidebar-ring: #ffdc00;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-roboto);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+  }
+
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .font-roboto {
+    font-family: var(--font-roboto);
+  }
+
+  button {
+    cursor: pointer;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+  }
+
+  button:hover {
+    opacity: 0.9;
+  }
+}
+
+@layer utilities {
+  .font-metropolis-bold {
+    font-family: "Metropolis", sans-serif;
+    font-weight: 800;
+  }
+
+  .bg-header {
+    background-color: var(--color-bg-secondary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .step-line {
+    height: 1px;
+    background: linear-gradient(90deg, var(--color-accent-cyan) 0%, var(--color-border) 100%);
+    flex-grow: 1;
+  }
+
+  .cookie-modal {
+    background-color: var(--color-bg-secondary);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--color-border);
+  }
+}
