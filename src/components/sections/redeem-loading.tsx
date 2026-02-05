@@ -14,7 +14,7 @@ export default function RedeemLoading() {
   };
 
   return (
-    <div className="bg-[#3c139c] min-h-screen relative py-12">
+    <div className="bg-[#4618ac] min-h-screen relative py-12">
         <h1 className="text-center text-[32px] font-bold mb-6 text-white font-metropolis-bold leading-[1.25]">Get your product</h1>
 
         <div className="flex gap-0 items-start justify-center px-6 sm:px-16 md:px-24 lg:px-32">
@@ -37,8 +37,8 @@ export default function RedeemLoading() {
               </h3>
 
               <ul className="list-none p-0 m-0 grid grid-cols-2 sm:grid-cols-4 gap-12 w-full">
-                <li className="flex gap-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="w-6 h-6 flex-shrink-0" style={{ maxWidth: "40px", minWidth: "40px", height: "auto" }}>
+                <li className="flex gap-3 items-start">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="w-10 h-10 flex-shrink-0" style={{ maxWidth: "40px", minWidth: "40px" }}>
                     <g fill="none" fillRule="nonzero">
                       <path fill="#ffffff" d="M17.38 5.53l.02.13-.24.05-.03.29h.29l.38-.03.2-.2-.21-.07-.12-.12-.17-.24-.08-.34-.33.06-.09.12v.13l.16.09zM16.97 5.51l.03-.37-.29-.14-.41.11-.3.54V6h.35zM11.59 6l-.1.17H11v.17h.12l.01.08.3-.02.19-.07.04-.16.25-.01.09-.13-.22-.03h-.2zM10.01 7.13l-.01.16.23-.02.03-.16-.14-.11z"></path>
                       <path fill="#ffffff" d="M24 11.88a12.12 12.12 0 0 0-.85-4.31l-.1-.23A12.01 12.01 0 0 0 0 12a12.01 12.01 0 0 0 22.69 5.45A11.89 11.89 0 0 0 24 12v-.12zm-2.26-4.8L21.8 7l.26.54h-.12l-.21.03v-.49zM20 4.98v-.53c.2.2.38.4.55.62l-.22.32h-.75l-.05-.16.47-.24zM5.53 3.66v-.02h.24l.02-.08h.4v.17l-.12.15h-.54v-.22zm.38.54l.26-.04c.02 0 0 .24 0 .24l-.54.03-.1-.12.38-.11zm16.6 4.76h-.88l-.54-.4-.56.06v.34h-.18l-.2-.13-.97-.25v-.63l-1.23.1-.39.2h-.49l-.24-.03-.6.34v.62l-1.21.88.1.37h.25l-.07.36-.17.06-.01.94 1.05 1.2h.46l.03-.08h.82l.24-.22h.46l.26.26.7.07-.1.93.78 1.36-.41.78.03.36.32.32v.88l.42.57v.73h.36A11 11 0 0 1 1.87 7.69v-.34l.39-.48c.14-.26.28-.51.44-.76l.02.2-.46.56-.4.82v.63l.46.22v.87l.44.75.36.05.05-.26-.43-.64-.08-.64h.25l.1.65.61.9-.16.28.4.59.95.24v-.16l.39.06-.04.27.3.06.47.12.66.76.84.06.08.69-.57.4-.03.61-.08.38.83 1.04.06.36.34.08c.04 0 .68.48.68.48v1.89l.23.06-.16.87.39.52-.07.86.5.89.66.57.65.01.07-.2-.49-.42.03-.2.09-.24.02-.26h-.33l-.16-.21.27-.26.03-.2-.3-.08.02-.19.43-.06.65-.32.22-.4.69-.88-.16-.68.21-.37.64.02.42-.34.14-1.32.47-.6.08-.39-.43-.13-.28-.47-.97-.01-.77-.3-.04-.54-.25-.45-.7-.01-.4-.63-.36-.18-.02.2-.65.04-.23-.34-.68-.13-.56.64-.88-.15-.06-.99-.64-.1.25-.5-.07-.27-.84.56-.53-.06-.2-.42.12-.42.3-.54.67-.34h1.3v.4l.46.21L7.5 9l.33-.34.68-.44.05-.32.67-.7.72-.4-.06-.05.49-.46.18.05.08.1.18-.2.05-.03-.2-.03-.2-.06v-.2l.1-.09h.24l.11.05.1.19.11-.02v-.01h.04l.33-.04.05-.17.2.05v.18l-.18.12.02.2.61.19h.15V6.3l-.48-.23-.03-.12.4-.14.02-.38-.42-.26-.03-.65-.57.28h-.21l.05-.5-.78-.18-.33.25v.75l-.58.18-.23.5-.26.03v-.62l-.55-.08-.27-.18-.11-.4.98-.58.48-.14.05.32.27-.01.02-.17.28-.04v-.05l-.12-.05-.03-.17.35-.03.2-.22.02-.01.06-.07.73-.09.32.27-.84.45 1.06.25.14-.36h.47l.16-.3-.33-.1v-.38L11.2 2.6l-.71.08-.4.21.02.51-.42-.06-.07-.28.4-.37-.72-.04-.21.07-.1.24.28.05-.06.27-.46.03-.08.18-.67.02s-.02-.38-.05-.38l.53-.01.4-.4-.21-.1-.3.28-.48-.03-.3-.4h-.62l-.65.49h.6l.05.17-.15.14.66.02.1.24-.74-.03-.04-.18-.47-.1-.24-.14h-.56a10.95 10.95 0 0 1 13.74.65l-.13.23-.5.2-.22.23.05.27.26.04.16.4.45-.19.07.53h-.13l-.37-.05-.42.07-.4.56-.56.09-.09.49.24.05-.07.32-.56-.12-.52.12-.11.28.09.61.3.14h.52l.34-.03.1-.27.54-.7.36.07.35-.32.06.25.86.58-.1.14-.39-.02.15.21.24.05.28-.11v-.34l.12-.06-.1-.1-.58-.33-.15-.42h.48l.15.15.41.35.02.43.42.45.16-.62.3-.16.05.5.3.32h.56c.12.28.22.57.3.87l-.06.05zM6.54 5.45l.28-.14.26.07-.09.35-.28.09-.17-.37zm1.53.83v.22h-.66l-.25-.07.06-.15.32-.14h.43v.14h.1zm.3.31v.22l-.17.1-.2.05v-.37h.37zm-.19-.09v-.26l.23.2-.23.06zm.1.53v.21l-.15.16h-.35l.05-.24.17-.01.03-.08.26-.04zm-.87-.44h.37l-.47.65-.2-.1.05-.27.25-.28zm1.5.37v.2h-.36l-.1-.13v-.2h.04l.41.13zm-.33-.3l.1-.1.17.1-.14.11-.13-.1zm14.1 2.85l.03-.04.04.19-.08-.15z"></path>
@@ -46,7 +46,7 @@ export default function RedeemLoading() {
                   </svg>
                   <div>
                     <div className="text-[12px] text-white/60 font-medium">Region</div>
-                    <strong className="text-[14px] font-bold text-white block font-metropolis-bold">GLOBAL</strong>
+                    <strong className="text-[20px] font-bold text-white block font-metropolis-bold">GLOBAL</strong>
                     <a href="/es/support/article/region-restrictions" target="_blank" className="text-[12px] text-[#FAD318] hover:underline font-semibold">
                       <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" className="inline w-3 h-3 mr-1" style={{ maxWidth: "12px", minWidth: "12px" }}>
                         <path fill="#FAD318" d="M14.63 14.63H2.37V2.37H8.5V.63H2.37C1.4.63.63 1.43.63 2.38v12.25c0 .97.78 1.76 1.75 1.76h12.25c.97 0 1.76-.8 1.76-1.75V8.5h-1.75v6.13zm-4.38-14v1.75h3.14l-8.6 8.6 1.23 1.23 8.6-8.6v3.14h1.76V.62h-6.13z"></path>
@@ -55,7 +55,7 @@ export default function RedeemLoading() {
                     </a>
                   </div>
                 </li>
-                <li className="flex gap-3">
+                <li className="flex gap-3 items-start">
                   <Image
                     src="https://products.eneba.games/drms/v1/steam.svg"
                     alt="Steam"
@@ -63,9 +63,10 @@ export default function RedeemLoading() {
                     height={40}
                     className="w-10 h-10 flex-shrink-0"
                   />
+
                   <div>
                     <div className="text-[12px] text-white/60 font-medium">Platform</div>
-                    <strong className="text-[14px] font-bold text-white block font-metropolis-bold">STEAM</strong>
+                    <strong className="text-[20px] font-bold text-white block font-metropolis-bold">STEAM</strong>
                     <a href="/es/support/article/steam-game-key-activation" target="_blank" className="text-[12px] text-[#FAD318] hover:underline font-semibold">
                       <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" className="inline w-3 h-3 mr-1" style={{ maxWidth: "12px", minWidth: "12px" }}>
                         <path fill="#FAD318" d="M14.63 14.63H2.37V2.37H8.5V.63H2.37C1.4.63.63 1.43.63 2.38v12.25c0 .97.78 1.76 1.75 1.76h12.25c.97 0 1.76-.8 1.76-1.75V8.5h-1.75v6.13zm-4.38-14v1.75h3.14l-8.6 8.6 1.23 1.23 8.6-8.6v3.14h1.76V.62h-6.13z"></path>
@@ -74,14 +75,15 @@ export default function RedeemLoading() {
                     </a>
                   </div>
                 </li>
-                <li className="flex gap-3">
+                <li className="flex gap-3 items-start">
                   <svg xmlns="http://www.w3.org/2000/svg" width="42" height="41.99" viewBox="0 0 42 41.99" className="w-10 h-10 flex-shrink-0 text-white" style={{ maxWidth: "40px", minWidth: "40px" }}>
                     <ellipse cx="2.46" cy="2.95" rx="2.46" ry="2.95" fill="currentColor" transform="translate(27.52 8.85)"></ellipse>
                     <path d="M41.55 13.6a23.93 23.93 0 00-5.16-8.1A23.38 23.38 0 0028.33.42a6.6 6.6 0 00-7 1.49L14.9 8.33a6.57 6.57 0 00-1.37 7.28c.34.76.7 1.5 1.1 2.22L.48 31.97A1.64 1.64 0 000 33.13v7.22A1.64 1.64 0 001.64 42h7.22a1.64 1.64 0 001.64-1.64V37.4h2.95a1.64 1.64 0 001.64-1.65V32.8h2.96a1.64 1.64 0 100-3.28h-4.6a1.64 1.64 0 00-1.64 1.64v2.95H8.86a1.64 1.64 0 00-1.64 1.65v2.95H3.28v-4.9l14.55-14.55a1.64 1.64 0 00.24-2.01 26.55 26.55 0 01-1.55-2.98 3.27 3.27 0 01.69-3.62l6.44-6.4a3.31 3.31 0 013.5-.75 20.09 20.09 0 016.92 4.32 20.64 20.64 0 014.42 6.99 3.26 3.26 0 01-.73 3.5l-6.52 6.49a3.3 3.3 0 01-3.61.7 21.3 21.3 0 01-2.96-1.51 1.64 1.64 0 00-1.71 2.8 24.59 24.59 0 003.4 1.74 6.58 6.58 0 007.2-1.4l6.51-6.5a6.54 6.54 0 001.48-7.02z" fill="currentColor"></path>
                   </svg>
                   <div>
                     <div className="text-[12px] text-white/60 font-medium">Product Type</div>
-                    <strong className="text-[14px] font-bold text-white block font-metropolis-bold">DIGITAL KEY</strong>
+                    <strong className="text-[20px] font-bold text-white block font-metropolis-bold">DIGITAL KEY</strong>
+
                   </div>
                 </li>
                 <li className="col-span-2 sm:col-span-1">
@@ -101,7 +103,7 @@ export default function RedeemLoading() {
                 <li>
                   <div className="flex items-center justify-center gap-3 py-6">
                     <div className="relative text-center" tabIndex={-1} role="button">
-                      <strong className="font-mono text-[20px] sm:text-[28px] font-bold text-white tracking-[2px] font-metropolis-bold">
+                      <strong className="font-mono text-[20px] sm:text-[30px] font-bold text-white tracking-[2px] font-metropolis-bold">
                         {productKey}
                       </strong>
                       {copied && (
@@ -129,7 +131,7 @@ export default function RedeemLoading() {
                   href="https://store.steampowered.com/account/registerkey?key=V7CTM-39XV2-PHW9Z"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-[270px] h-[35px] flex items-center justify-center bg-[#FAD318] hover:bg-[#F0C000] text-black px-10 py-1.5 font-bold text-[14px] transition-all whitespace-nowrap"
+                  className="w-[270px] h-[35px] flex items-center justify-center bg-[#FAD318] hover:bg-[#F0C000] text-black px-10 py-1.5 font-bold text-[15px] transition-all whitespace-nowrap"
                 >
                   <strong>Activate on</strong>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 17" style={{ width: "auto", height: "16px", margin: "0 4px" }}>
@@ -138,7 +140,7 @@ export default function RedeemLoading() {
                   <strong>STEAM</strong>
                 </a>
 
-                <button type="button" className="w-[270px] h-[35px] flex items-center justify-center gap-2 border-2 border-white bg-transparent hover:bg-white/10 text-white px-10 py-1.5 font-bold text-[14px] transition-all whitespace-nowrap">
+                <button type="button" className="w-[270px] h-[35px] flex items-center justify-center gap-2 border-2 border-white bg-transparent hover:bg-white/10 text-white px-10 py-1.5 font-bold text-[15px] transition-all whitespace-nowrap">
                   <span>Print as a gift</span>
                 </button>
               </div>
@@ -151,7 +153,7 @@ export default function RedeemLoading() {
                     href="https://my.eneba.com/es/my-library"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 border-2 border-white text-white hover:bg-white/10 px-6 py-2.5 rounded font-bold text-[14px] transition-all flex-shrink-0 whitespace-nowrap"
+                    className="inline-flex items-center justify-center gap-2 border-2 border-white text-white hover:bg-white/10 px-6 py-2.5 rounded font-bold text-[15px] transition-all flex-shrink-0 whitespace-nowrap"
                   >
                     <span>My Library</span>
                   </a>
@@ -171,11 +173,11 @@ export default function RedeemLoading() {
                 />
               </div>
               <div>
-                <span className="text-[16px] font-bold text-white block font-metropolis-bold">Help Us Improve Eneba</span>
+                <span className="text-[18px] font-bold text-white block font-metropolis-bold">Help Us Improve Eneba</span>
                 <span className="text-[14px] text-white/80 block">Rate 4 simple statements, we'd love to hear your feedback</span>
               </div>
             </div>
-            <button type="button" className="bg-[#FAD318] hover:bg-[#F0C000] text-black px-6 py-2.5 rounded font-bold text-[14px] transition-all flex-shrink-0 whitespace-nowrap">
+            <button type="button" className="bg-[#FAD318] hover:bg-[#F0C000] text-black px-6 py-2.5 rounded font-bold text-[15px] transition-all flex-shrink-0 whitespace-nowrap">
               <span>Take Survey</span>
             </button>
           </div>
@@ -205,7 +207,7 @@ export default function RedeemLoading() {
                 </div>
               </div>
 
-              <button type="button" className="flex items-center gap-2 border-2 border-white text-white hover:bg-white/10 px-4 py-2 rounded text-[14px] font-semibold transition-all flex-shrink-0 whitespace-nowrap">
+              <button type="button" className="flex items-center gap-2 border-2 border-white text-white hover:bg-white/10 px-4 py-2 rounded text-[15px] font-semibold transition-all flex-shrink-0 whitespace-nowrap">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" className="w-5 h-5" style={{ maxWidth: "20px", minWidth: "20px" }}>
                   <path fill="currentColor" d="M13.6 12.1l-5.8-11C7.6.9 7.3.7 7 .7c-.3 0-.6.2-.7.4l-5.9 11c-.1.3-.1.6 0 .8.2.3.4.4.7.4h11.7c.3 0 .6-.2.7-.4.2-.3.2-.6.1-.8zM7 11.6c-.5 0-.8-.4-.8-.8s.3-.9.8-.9.8.4.8.8-.3.9-.8.9zm.9-3.3c0 .5-.4.8-.8.8-.5 0-.8-.4-.8-.8V4.9c0-.5.4-.8.8-.8.5 0 .8.4.8.8v3.4z"></path>
                 </svg>
