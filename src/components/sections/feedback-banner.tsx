@@ -22,7 +22,7 @@ const FeedbackBanner = () => {
       {/* Text Content */}
       <div className="flex-grow flex flex-col justify-center min-w-0">
         <span className="text-[#212121] text-[16px] font-bold leading-tight mb-1 font-metropolis-bold">
-          Help Us Improve Eneba
+          Help us improve Eneba
         </span>
         <span className="text-[#757575] text-[14px] leading-normal truncate block">
           Rate 4 simple statements, we'd love to hear your feedback
@@ -34,7 +34,7 @@ const FeedbackBanner = () => {
         <button 
           className="w-full md:w-auto bg-[#ffc600] hover:bg-[#ffdb4d] text-[#212121] font-semibold py-[10px] px-6 rounded-md text-[14px] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ffc600] focus:ring-offset-1"
         >
-          <span>Take Survey</span>
+          <span>Take the Survey</span>
         </button>
       </div>
     </div>

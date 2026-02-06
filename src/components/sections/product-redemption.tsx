@@ -51,7 +51,7 @@ const ProductRedemption = () => {
                     <span className="text-[#757575] text-[12px] block font-medium">Region</span>
                     <strong className="text-[14px] font-bold block font-metropolis-bold">GLOBAL</strong>
                     <button className="text-[12px] text-[#451093] hover:underline flex items-center gap-1 mt-1 transition-colors">
-                      Check region restrictions
+                      <span className="font-normal">Check region restrictions</span>
                     </button>
                   </div>
                 </div>
@@ -71,7 +71,7 @@ const ProductRedemption = () => {
                     <span className="text-[#757575] text-[12px] block font-medium">Platform</span>
                     <strong className="text-[14px] font-bold block font-metropolis-bold">Steam</strong>
                     <a href="#" className="text-[12px] text-[#451093] hover:underline flex items-center gap-1 mt-1 font-semibold">
-                      Activation Guide
+                      <span className="font-normal">Activation Guide</span>
                     </a>
                   </div>
                 </div>
@@ -156,18 +156,18 @@ const ProductRedemption = () => {
                 />
               </div>
               <div className="text-white">
-                <span className="block font-bold text-[14px] font-metropolis-bold">Help Us Improve Eneba</span>
+                <span className="block font-bold text-[14px] font-metropolis-bold">Help us improve Eneba</span>
                 <span className="block text-[12px] text-white/80">Rate 4 simple statements, we'd love to hear your feedback</span>
               </div>
             </div>
             <button className="bg-white text-[#451093] hover:bg-[#f5f5f5] px-6 py-2 rounded-md font-bold text-[14px] transition-colors whitespace-nowrap">
-              Take Survey
+              Take the Survey
             </button>
           </div>
 
           {/* Legal Disclaimer */}
           <p className="mt-8 text-[12px] text-[#757575] text-center max-w-2xl mx-auto leading-relaxed italic">
-            Since this is a digital product and the key has been displayed, it is not eligible for a refund unless the key is invalid or defective.
+            Since it’s a digital product and the key was displayed, you are not eligible for a refund unless the key is invalid or faulty.
           </p>
 
           {/* Seller Information */}

@@ -41,7 +41,7 @@ export default function Header() {
             <li className="flex items-center">
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 rounded-full border border-[#00d2b4] bg-[#00d2b4] flex items-center justify-center">
-                  <span className="text-[12px] font-bold text-[#2a0d6e]">3</span>
+                  <span className="text-[12px] font-bold text-white">3</span>
                 </div>
                 <span className="text-[12px] font-medium text-[#b9a4f1] font-roboto whitespace-nowrap font-metropolis-bold">Get your product</span>
               </div>

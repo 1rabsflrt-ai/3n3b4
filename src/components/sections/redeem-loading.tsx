@@ -109,7 +109,7 @@ export default function RedeemLoading() {
                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" className="inline w-3 h-3 mr-1" style={{ maxWidth: "12px", minWidth: "12px" }}>
                           <path fill="#FAD318" d="M14.63 14.63H2.37V2.37H8.5V.63H2.37C1.4.63.63 1.43.63 2.38v12.25c0 .97.78 1.76 1.75 1.76h12.25c.97 0 1.76-.8 1.76-1.75V8.5h-1.75v6.13zm-4.38-14v1.75h3.14l-8.6 8.6 1.23 1.23 8.6-8.6v3.14h1.76V.62h-6.13z"></path>
                         </svg>
-                        Check region restrictions
+                        <span className="font-normal">Check region restrictions</span>
                       </a>
                     </div>
                   </li>
@@ -129,7 +129,7 @@ export default function RedeemLoading() {
                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" className="inline w-3 h-3 mr-1" style={{ maxWidth: "12px", minWidth: "12px" }}>
                           <path fill="#FAD318" d="M14.63 14.63H2.37V2.37H8.5V.63H2.37C1.4.63.63 1.43.63 2.38v12.25c0 .97.78 1.76 1.75 1.76h12.25c.97 0 1.76-.8 1.76-1.75V8.5h-1.75v6.13zm-4.38-14v1.75h3.14l-8.6 8.6 1.23 1.23 8.6-8.6v3.14h1.76V.62h-6.13z"></path>
                         </svg>
-                        Activation Guide
+                        <span className="font-normal">Activation Guide</span>
                       </a>
                     </div>
                   </li>
@@ -205,7 +205,7 @@ export default function RedeemLoading() {
               <div className="border-t border-white/20 pt-4 mt-4">
                 <div className="flex flex-col md:flex-row items-center justify-center gap-10">
                   <p className="text-[14px] text-white/60">
-                    Don't want to use it now? No worries. You can always find the code in your Library.
+                    Don’t want to use it now? Don’t worry. You can always find the code in your Library!
                   </p>
                   <a
                     href="https://my.eneba.com/es/my-library"
@@ -231,16 +231,16 @@ export default function RedeemLoading() {
                 />
               </div>
               <div>
-                <span className="text-[18px] font-bold text-white block font-metropolis-bold">Help Us Improve Eneba</span>
+                <span className="text-[18px] font-bold text-white block font-metropolis-bold">Help us improve Eneba</span>
                 <span className="text-[14px] text-white/80 block">Rate 4 simple statements, we'd love to hear your feedback</span>
               </div>
             </div>
             <button type="button" className="bg-[#FAD318] hover:bg-[#F0C000] text-black px-6 py-2.5 rounded font-bold text-[15px] transition-all flex-shrink-0 whitespace-nowrap">
-              <span>Take Survey</span>
+              <span>Take the Survey</span>
             </button>
           </div>
           <p className="text-[14px] text-white/60 w-full mt-4">
-            Since this is a digital product and the key has been displayed, it is not eligible for a refund unless the key is invalid or defective.
+            Since it’s a digital product and the key was displayed, you are not eligible for a refund unless the key is invalid or faulty.
           </p>
           <div className="pt-4">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">

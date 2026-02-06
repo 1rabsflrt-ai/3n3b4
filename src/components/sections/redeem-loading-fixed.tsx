@@ -3,43 +3,154 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
+interface GameData {
+  key: string;
+  title: string;
+  imageUrl: string;
+  region: string;
+  avatarUrl?: string;
+}
+
 interface ProductKeyModalProps {
   isOpen: boolean;
   onClose: () => void;
-  keyValue: string;
-  onSave: (key: string) => void;
+  initialData: GameData;
+  onSave: (data: GameData) => void;
 }
 
-const ProductKeyModal = ({ isOpen, onClose, keyValue, onSave }: ProductKeyModalProps) => {
-  const [inputValue, setInputValue] = useState(keyValue);
+const ProductKeyModal = ({ isOpen, onClose, initialData, onSave }: ProductKeyModalProps) => {
+  const [formData, setFormData] = useState<GameData>({
+    key: initialData.key || '',
+    title: initialData.title || '',
+    imageUrl: initialData.imageUrl || '',
+    region: initialData.region || 'GLOBAL',
+    avatarUrl: initialData.avatarUrl || 'https://imgproxy.eneba.games/p1ibztjSzYq8WslGtr_OFfTyTrVerFsSB836Idpo9Mk/rs:fit:40/ar:1/aHR0cHM6Ly9hdmF0/YXJzLmVuZWJhLmdh/bWVzL2k4TmlmZU10/VmtENTRmNEZWamtX/VEdKSFpYdEN5RDIt/MzJrbFRjem8ybGMuanBlZw',
+    sellerName: 'Games Federation'  // Add seller name field
+  });
+  const [imagePreview, setImagePreview] = useState<string | null>(initialData.imageUrl || null);
+
+  useEffect(() => {
+    if (isOpen) {
+      setFormData({
+        ...initialData,
+        sellerName: initialData.sellerName || 'Games Federation'
+      });
+      setImagePreview(initialData.imageUrl);
+    }
+  }, [initialData, isOpen]);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const dataToSave = {
+      ...formData,
+      imageUrl: imagePreview || formData.imageUrl,
+      sellerName: formData.sellerName || 'Games Federation'  // Ensure seller name is always set
+    };
+    onSave(dataToSave);
+    onClose();
+  };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-[#351183] rounded-lg p-6 max-w-md w-full">
-        <h3 className="text-white text-lg font-bold mb-4">Edit Product Key</h3>
-        <input
-          type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          className="w-full p-2 mb-4 bg-[#2a0e68] text-white border border-[#4c2a8a] rounded"
-          autoFocus
-        />
-        <div className="flex justify-end gap-3">
-          <button
-            onClick={onClose}
-            className="px-4 py-2 text-white hover:bg-white/10 rounded"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={() => onSave(inputValue)}
-            className="px-4 py-2 bg-[#FAD318] text-black font-semibold rounded hover:bg-[#F0C000]"
-          >
-            Save
-          </button>
-        </div>
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto">
+      <div className="bg-[#351183] rounded-lg p-6 w-full max-w-2xl my-8">
+        <h3 className="text-white text-xl font-bold mb-6 text-center">Редактировать игру</h3>
+        
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Поле названия игры */}
+          <div>
+            <label className="block text-white/80 text-sm font-medium mb-1">Название игры</label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleInputChange}
+              className="w-full p-3 bg-[#2a0e68] text-white border border-[#4c2a8a] rounded-lg focus:ring-2 focus:ring-[#FAD318] focus:border-transparent"
+              placeholder="Введите название игры"
+              required
+            />
+          </div>
+          
+          {/* Поле ключа продукта */}
+          <div>
+            <label className="block text-white/80 text-sm font-medium mb-1">Ключ продукта</label>
+            <input
+              type="text"
+              name="key"
+              value={formData.key}
+              onChange={handleInputChange}
+              className="w-full p-3 bg-[#2a0e68] text-white border border-[#4c2a8a] rounded-lg font-mono focus:ring-2 focus:ring-[#FAD318] focus:border-transparent"
+              placeholder="XXXXX-XXXXX-XXXXX-XXXXX"
+              required
+            />
+          </div>
+          
+          {/* Выбор региона */}
+          <div>
+            <label className="block text-white/80 text-sm font-medium mb-1">Регион</label>
+            <input
+              type="text"
+              name="region"
+              value={formData.region}
+              onChange={handleInputChange}
+              className="w-full p-3 bg-[#2a0e68] text-white border border-[#4c2a8a] rounded-lg focus:ring-2 focus:ring-[#FAD318] focus:border-transparent"
+              placeholder="Введите регион"
+            />
+          </div>
+
+          {/* Seller Name */}
+          <div>
+            <label className="block text-white/80 text-sm font-medium mb-1">Seller Name</label>
+            <input
+              type="text"
+              name="sellerName"
+              value={formData.sellerName || 'Games Federation'}
+              onChange={handleInputChange}
+              className="w-full p-3 bg-[#2a0e68] text-white border border-[#4c2a8a] rounded-lg focus:ring-2 focus:ring-[#FAD318] focus:border-transparent"
+              placeholder="Enter seller name"
+            />
+          </div>
+          
+          {/* Кнопки управления */}
+          <div className="flex justify-end gap-4 pt-6 border-t border-[#4c2a8a]/50">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-6 py-2.5 text-white hover:bg-white/10 rounded-lg transition-colors"
+            >
+              Отмена
+            </button>
+            <button
+              type="submit"
+              className="px-6 py-2.5 bg-[#FAD318] hover:bg-[#F0C000] text-black font-semibold rounded-lg transition-colors flex items-center"
+            >
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Сохранить изменения
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
@@ -49,23 +160,55 @@ export default function RedeemLoadingFixed() {
   const [copied, setCopied] = useState(false);
   const [verifying, setVerifying] = useState(true);
   const [showKeyModal, setShowKeyModal] = useState(false);
-  const [productKey, setProductKey] = useState(
-    typeof window !== 'undefined' ? localStorage.getItem('productKey') || "V7CTM-39XV2-PHW9Z" : "V7CTM-39XV2-PHW9Z"
-  );
-
-  // Load saved key from localStorage on component mount
-  useEffect(() => {
-    const savedKey = typeof window !== 'undefined' ? localStorage.getItem('productKey') : null;
-    if (savedKey) {
-      setProductKey(savedKey);
+  
+  // Initialize game data with defaults or from localStorage
+  const [gameData, setGameData] = useState<GameData>(() => {
+    if (typeof window === 'undefined') {
+      return {
+        key: "V7CTM-39XV2-PHW9Z",
+        title: "Sniper Elite 4 Steam Key",
+        imageUrl: "https://cdn1.epicgames.com/offer/2bda08f9230144a19e98373cc4a6ac2d/EGS_SniperElite4_RebellionDevelopments_S1_2560x1440-6d998847b0d56222bd5dfd487227508e",
+        region: "GLOBAL"
+      };
     }
-  }, []);
-
-  const handleSaveKey = (newKey) => {
-    setProductKey(newKey);
+    
     if (typeof window !== 'undefined') {
-      localStorage.setItem('productKey', newKey);
+      try {
+        const savedData = localStorage.getItem('gameData');
+        if (savedData) {
+          return JSON.parse(savedData);
+        }
+      } catch (e) {
+        console.error('Failed to parse saved game data', e);
+      }
     }
+    
+    // Default values if no saved data exists
+    return {
+      key: localStorage.getItem('productKey') || "V7CTM-39XV2-PHW9Z",
+      title: "Sniper Elite 4 Steam Key",
+      imageUrl: "https://cdn1.epicgames.com/offer/2bda08f9230144a19e98373cc4a6ac2d/EGS_SniperElite4_RebellionDevelopments_S1_2560x1440-6d998847b0d56222bd5dfd487227508e",
+      region: "GLOBAL",
+      avatarUrl: "https://imgproxy.eneba.games/p1ibztjSzYq8WslGtr_OFfTyTrVerFsSB836Idpo9Mk/rs:fit:40/ar:1/aHR0cHM6Ly9hdmF0/YXJzLmVuZWJhLmdh/bWVzL2k4TmlmZU10/VmtENTRmNEZWamtX/VEdKSFpYdEN5RDIt/MzJrbFRjem8ybGMuanBlZw"
+    };
+  });
+
+
+  const handleSaveGameData = (newData: GameData) => {
+    // Обновляем состояние с новыми данными
+    setGameData(prevData => ({
+      ...prevData,
+      ...newData
+    }));
+    
+    // Сохраняем в localStorage
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('gameData', JSON.stringify({
+        ...gameData,
+        ...newData
+      }));
+    }
+    
     setShowKeyModal(false);
   };
 
@@ -75,7 +218,7 @@ export default function RedeemLoadingFixed() {
   }, []);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(productKey);
+    navigator.clipboard.writeText(gameData.key);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -92,40 +235,13 @@ export default function RedeemLoadingFixed() {
         Get your product
       </h1>
 
-      {/* Modal Portal */}
-      {showKeyModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-[#351183] rounded-lg p-6 max-w-md w-full">
-            <h3 className="text-white text-lg font-bold mb-4">Изменить ключ продукта</h3>
-            <input
-              type="text"
-              value={productKey}
-              onChange={(e) => setProductKey(e.target.value)}
-              className="w-full p-2 mb-4 bg-[#2a0e68] text-white border border-[#4c2a8a] rounded"
-              autoFocus
-            />
-            <div className="flex justify-end gap-3">
-              <button
-                onClick={() => setShowKeyModal(false)}
-                className="px-4 py-2 text-white hover:bg-white/10 rounded"
-              >
-                Отмена
-              </button>
-              <button
-                onClick={() => {
-                  if (typeof window !== 'undefined') {
-                    localStorage.setItem('productKey', productKey);
-                  }
-                  setShowKeyModal(false);
-                }}
-                className="px-4 py-2 bg-[#FAD318] text-black font-semibold rounded hover:bg-[#F0C000]"
-              >
-                Сохранить
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Game Edit Modal */}
+      <ProductKeyModal
+        isOpen={showKeyModal}
+        onClose={() => setShowKeyModal(false)}
+        initialData={gameData}
+        onSave={handleSaveGameData}
+      />
 
       {verifying ? (
         <>
@@ -134,7 +250,7 @@ export default function RedeemLoadingFixed() {
               Safety first, are you a real human being?
             </p>
 
-            <div className="bg-white rounded-[4px] p-4 flex items-center justify-between w-full max-w-[300px] shadow-lg">
+            <div className="bg-white rounded-[4px] p-4 flex items-center justify-between w-full max-w-[300px] shadow-lg relative">
               <div className="flex items-center gap-3">
                 <div className="relative w-7 h-7">
                   <div className="absolute inset-0 border-[3px] border-[#00d2b4]/20 rounded-full"></div>
@@ -143,11 +259,16 @@ export default function RedeemLoadingFixed() {
                 <span className="text-[#333] text-[15px] font-medium">Verifying...</span>
               </div>
 
-              <div className="flex flex-col items-end opacity-80">
-                <div className="flex items-center gap-1">
-                  <span className="text-[9px] font-bold text-[#333]">CLOUDFLARE</span>
+              <div className="flex flex-col items-end">
+                <div className="flex items-center">
+                  <img 
+                    src="/Cloudflare_Logo.svg" 
+                    alt="Cloudflare" 
+                    className="h-5 w-auto"
+                    style={{ minWidth: '80px' }}
+                  />
                 </div>
-                <div className="flex gap-2 mt-0.5">
+                <div className="flex gap-2 mt-1">
                   <span className="text-[8px] text-[#0051c3] cursor-pointer hover:underline">Privacy</span>
                   <span className="text-[8px] text-[#0051c3] cursor-pointer hover:underline">Terms</span>
                 </div>
@@ -190,20 +311,53 @@ export default function RedeemLoadingFixed() {
         <div className="flex gap-0 items-start justify-center px-6 sm:px-16 md:px-24 lg:px-32">
           <div className="bg-[#351183] rounded-lg overflow-hidden flex-shrink-0 p-3 flex items-center justify-center ml-6">
             <div className="w-[80px] h-[110px] bg-gray-200 rounded-lg overflow-hidden">
-              <Image
-                src="https://imgproxy.eneba.games/iH0q8-V30s0_NVfXP1QDbj6wH_aSks3EzbkeGJ9jGhI/rs:fit:60/ar:1/czM6Ly9wcm9kdWN0/cy5lbmViYS5nYW1l/cy9wcm9kdWN0cy9T/bmlwZXIgRWxpdGUg/NC5qcGc"
-                alt="Sniper Elite 4"
-                width={80}
-                height={110}
-                className="w-full h-full object-cover"
-              />
+              <div 
+                className="w-full h-full cursor-pointer relative group"
+                onClick={() => document.getElementById('image-upload')?.click()}
+              >
+                <Image
+                  src={gameData.imageUrl || "https://imgproxy.eneba.games/iH0q8-V30s0_NVfXP1QDbj6wH_aSks3EzbkeGJ9jGhI/rs:fit:60/ar:1/czM6Ly9wcm9kdWN0/cy5lbmViYS5nYW1l/cy9wcm9kdWN0cy9T/bmlwZXIgRWxpdGUg/NC5qcGc"}
+                  alt={gameData.title || "Game Image"}
+                  width={80}
+                  height={110}
+                  className="w-full h-full object-cover group-hover:opacity-80 transition-opacity"
+                />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <input
+                  id="image-upload"
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        const result = reader.result as string;
+                        const newData = {
+                          ...gameData,
+                          imageUrl: result
+                        };
+                        setGameData(newData);
+                        localStorage.setItem('gameData', JSON.stringify(newData));
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                />
+              </div>
             </div>
           </div>
           <div className="bg-[#351183] rounded-lg shadow-lg p-6 space-y-6 flex-grow">
             <div className="flex gap-6">
               <div className="flex-grow">
                 <h3 className="text-[18px] font-bold text-white mb-6 font-metropolis-bold">
-                  <span>Sniper Elite 4 Steam Key GLOBAL</span>
+                  <span>{gameData.title} {gameData.region}</span>
                 </h3>
 
                 <ul className="list-none p-0 m-0 grid grid-cols-2 sm:grid-cols-4 gap-12 w-full">
@@ -221,27 +375,17 @@ export default function RedeemLoadingFixed() {
                     </svg>
                     <div>
                       <div className="text-[12px] text-white/60 font-medium">Region</div>
-                      <strong className="text-[20px] font-bold text-white block font-metropolis-bold">GLOBAL</strong>
-                      <a
-                        href="/es/support/article/region-restrictions"
-                        target="_blank"
-                        className="text-[12px] text-[#FAD318] hover:underline font-semibold"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="17"
-                          height="17"
-                          viewBox="0 0 17 17"
-                          className="inline w-3 h-3 mr-1"
-                          style={{ maxWidth: "12px", minWidth: "12px" }}
+                      <strong className="text-[20px] font-bold text-white block font-metropolis-bold">{gameData.region}</strong>
+                      <div className="text-[12px]">
+                        <span className="text-white">Check </span>
+                        <a 
+                          href="/es/support/article/region-restrictions"
+                          target="_blank"
+                          className="text-[#FAD318] hover:underline font-normal"
                         >
-                          <path
-                            fill="#FAD318"
-                            d="M14.63 14.63H2.37V2.37H8.5V.63H2.37C1.4.63.63 1.43.63 2.38v12.25c0 .97.78 1.76 1.75 1.76h12.25c.97 0 1.76-.8 1.76-1.75V8.5h-1.75v6.13zm-4.38-14v1.75h3.14l-8.6 8.6 1.23 1.23 8.6-8.6v3.14h1.76V.62h-6.13z"
-                          ></path>
-                        </svg>
-                        Check region restrictions
-                      </a>
+                          region restrictions
+                        </a>
+                      </div>
                     </div>
                   </li>
 
@@ -274,7 +418,7 @@ export default function RedeemLoadingFixed() {
                             d="M14.63 14.63H2.37V2.37H8.5V.63H2.37C1.4.63.63 1.43.63 2.38v12.25c0 .97.78 1.76 1.75 1.76h12.25c.97 0 1.76-.8 1.76-1.75V8.5h-1.75v6.13zm-4.38-14v1.75h3.14l-8.6 8.6 1.23 1.23 8.6-8.6v3.14h1.76V.62h-6.13z"
                           ></path>
                         </svg>
-                        Activation Guide
+                        <span className="font-normal">Activation Guide</span>
                       </a>
                     </div>
                   </li>
@@ -302,7 +446,20 @@ export default function RedeemLoadingFixed() {
                       ></path>
                     </svg>
                     <div>
-                      <div className="text-[12px] text-white/60 font-medium">Product Type</div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-[12px] text-white/60 font-medium">Product Type</span>
+                        <div className="relative group">
+                          <svg className="w-3 h-3 text-white/60 cursor-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                          </svg>
+                          <div className="hidden group-hover:block absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 z-10 w-64 p-3 text-sm text-white bg-[#211d2c] rounded-md shadow-lg">
+                            This is not CD. You bought digital edition of the product. You'll receive CD-KEY only that can be used for activation product on valid platform.
+                            <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent border-t-[#211d2c]"></div>
+                          </div>
+                        </div>
+                      </div>
                       <div className="relative">
                         <div 
                           className="text-[20px] font-bold text-white block font-metropolis-bold cursor-pointer select-none"
@@ -333,7 +490,7 @@ export default function RedeemLoadingFixed() {
                     <div className="flex items-center justify-center gap-3 py-6">
                       <div className="relative text-center" tabIndex={-1} role="button">
                         <strong className="font-mono text-[20px] sm:text-[30px] font-bold text-white tracking-[2px] font-metropolis-bold">
-                          {productKey}
+                          {gameData.key}
                         </strong>
                         {copied && (
                           <div className="absolute top-[-35px] left-0 bg-yellow-100 text-black text-[11px] px-2 py-1 rounded whitespace-nowrap">
@@ -343,20 +500,9 @@ export default function RedeemLoadingFixed() {
                       </div>
 
                       <button type="button" onClick={handleCopy} className="flex-shrink-0 p-0 hover:opacity-80 transition">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="w-6 h-6 text-white"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M20 5.5H12C11.1716 5.5 10.5 6.17157 10.5 7V20C10.5 20.8284 11.1716 21.5 12 21.5H20C20.8284 21.5 21.5 20.8284 21.5 20V7C21.5 6.17157 20.8284 5.5 20 5.5ZM12 4C10.3431 4 9 5.34315 9 7V20C9 21.6569 10.3431 23 12 23H20C21.6569 23 23 21.6569 23 20V7C23 5.34315 21.6569 4 20 4H12Z"
-                            fill="currentColor"
-                          ></path>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-white">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25004 16.9959L2.25006 4.00413L2.25004 16.9959ZM2.25006 4.00413C2.25058 3.98474 2.25165 3.96537 2.25303 3.94601C2.25649 3.89759 2.26377 3.82352 2.27892 3.73267C2.30979 3.54742 2.37015 3.31187 2.48338 3.08541C2.59514 2.86188 2.75101 2.66117 2.97077 2.51466C3.18584 2.37129 3.5063 2.25 4.00006 2.25H12.4994C12.9137 2.25 13.2501 1.91421 13.2501 1.5C13.2501 1.08579 12.9143 0.75 12.5001 0.75H4.00006C3.24382 0.75 2.62678 0.941215 2.13872 1.26659C1.65536 1.58883 1.34247 2.01312 1.14174 2.41459C0.942469 2.81313 0.846573 3.20258 0.799324 3.48608C0.775404 3.6296 0.763153 3.75084 0.756846 3.83914C0.753061 3.89213 0.75033 3.94528 0.750059 3.99842C0.748279 5.7505 0.750057 13.3078 0.750057 17L0.750059 17.0016L0.750064 17.0034C0.750326 17.0471 0.751757 17.0896 0.756846 17.1609C0.763153 17.2492 0.775404 17.3704 0.799324 17.5139C0.846573 17.7974 0.942469 18.1869 1.14174 18.5854C1.34247 18.9869 1.65536 19.4112 2.13872 19.7334C2.62678 20.0588 3.24382 20.25 4.00006 20.25H6.99977C7.41399 20.25 7.75006 19.9142 7.75006 19.5C7.75006 19.0858 7.41427 18.75 7.00005 18.75H4.00006C3.5063 18.75 3.18584 18.6287 2.97077 18.4853C2.75101 18.3388 2.59514 18.1381 2.48338 17.9146C2.37015 17.6881 2.30979 17.4526 2.27892 17.2673C2.26377 17.1765 2.25649 17.1024 2.25303 17.054C2.25165 17.0346 2.2506 17.0153 2.25004 16.9959" fill="currentColor"></path>
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M20 5.5H12C11.1716 5.5 10.5 6.17157 10.5 7V20C10.5 20.8284 11.1716 21.5 12 21.5H20C20.8284 21.5 21.5 20.8284 21.5 20V7C21.5 6.17157 20.8284 5.5 20 5.5ZM12 4C10.3431 4 9 5.34315 9 7V20C9 21.6569 10.3431 23 12 23H20C21.6569 23 23 21.6569 23 20V7C23 5.34315 21.6569 4 20 4H12Z" fill="currentColor"></path>
                         </svg>
                       </button>
                     </div>
@@ -365,13 +511,16 @@ export default function RedeemLoadingFixed() {
 
                 <div className="flex flex-col sm:flex-row gap-6 mt-4 justify-center w-full pb-6 px-0">
                   <a
-                    href={`https://store.steampowered.com/account/registerkey?key=${productKey}`}
+                    href={`https://store.steampowered.com/account/registerkey?key=${gameData.key}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-[270px] h-[35px] flex items-center justify-center bg-[#FAD318] hover:bg-[#F0C000] text-black px-10 py-1.5 font-bold text-[15px] transition-all whitespace-nowrap"
                   >
                     <strong>Activate on</strong>
-                    <strong className="ml-2">STEAM</strong>
+                    <svg width="20" height="20" viewBox="0 0 30 24" fill="none" className="mx-1">
+                      <path fill="currentColor" fillRule="nonzero" d="M25.56 4.92a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0zm-1 4.24l-3.03 2.6a3.98 3.98 0 0 1-7.81 1.51l-7.49-2.55a3.52 3.52 0 0 1-5.65-2.8 3.53 3.53 0 0 1 6.95-.8l7.22 2.46a3.96 3.96 0 0 1 2.76-1.18l1.08-3.3-.02-.2a4.5 4.5 0 1 1 5.98 4.26zM6.31 6.7a2.46 2.46 0 0 0-4.62 1.2 2.47 2.47 0 0 0 3.18 2.36l-1.17-.4a1.94 1.94 0 1 1 1.83-3.43l.78.27zm13.25-1.8a3.5 3.5 0 0 0 7 0 3.5 3.5 0 1 0-7 0zm.07 7.83a2.67 2.67 0 0 0-3.26-2.6l1.48.5c.94.5 1.3 1.68.8 2.63-.51.95-1.68 1.3-2.63.8l-1.6-.55a2.67 2.67 0 0 0 5.21-.78z"/>
+                    </svg>
+                    <strong>STEAM</strong>
                   </a>
 
                   <button
@@ -384,8 +533,8 @@ export default function RedeemLoadingFixed() {
 
                 <div className="border-t border-white/20 pt-4 mt-4">
                   <div className="flex flex-col md:flex-row items-center justify-center gap-10">
-                    <p className="text-[14px] text-white/60">
-                      Don't want to use it now? No worries. You can always find the code in your Library.
+                    <p className="text-[14px] text-white">
+                      Don’t want to use it now? Don’t worry. You can always find the code in your Library!
                     </p>
                     <a
                       href="https://my.eneba.com/es/my-library"
@@ -412,8 +561,8 @@ export default function RedeemLoadingFixed() {
                   />
                 </div>
                 <div>
-                  <span className="text-[18px] font-bold text-white block font-metropolis-bold">Help Us Improve Eneba</span>
-                  <span className="text-[14px] text-white/80 block">
+                  <span className="text-[18px] font-bold text-white block font-metropolis-bold">Help us improve Eneba</span>
+                  <span className="text-[14px] text-white block">
                     Rate 4 simple statements, we'd love to hear your feedback
                   </span>
                 </div>
@@ -422,27 +571,59 @@ export default function RedeemLoadingFixed() {
                 type="button"
                 className="bg-[#FAD318] hover:bg-[#F0C000] text-black px-6 py-2.5 rounded font-bold text-[15px] transition-all flex-shrink-0 whitespace-nowrap"
               >
-                <span>Take Survey</span>
+                <span>Take the Survey</span>
               </button>
             </div>
 
-            <p className="text-[14px] text-white/60 w-full mt-4">
-              Since this is a digital product and the key has been displayed, it is not eligible for a refund unless the key is
-              invalid or defective.
+            <p className="text-[14px] text-white w-full mt-4">
+              Since it’s a digital product and the key was displayed, you are not eligible for a refund unless the key is invalid or faulty.
             </p>
 
             <div className="pt-4">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div className="flex items-start gap-3 flex-grow">
-                  <Image
-                    src="https://imgproxy.eneba.games/p1ibztjSzYq8WslGtr_OFfTyTrVerFsSB836Idpo9Mk/rs:fit:40/ar:1/aHR0cHM6Ly9hdmF0/YXJzLmVuZWJhLmdh/bWVzL2k4TmlmZU10/VmtENTRmNEZWamtX/VEdKSFpYdEN5RDIt/MzJrbFRjem8ybGMu/anBlZw"
-                    alt="Games Federation"
-                    width={35}
-                    height={35}
-                    className="w-[35px] h-[35px] rounded-full flex-shrink-0"
-                  />
+                  <div 
+                    className="relative w-[35px] h-[35px] flex-shrink-0 cursor-pointer group"
+                    onClick={() => document.getElementById('avatar-upload')?.click()}
+                  >
+                    <Image
+                      src={gameData.avatarUrl || "https://imgproxy.eneba.games/p1ibztjSzYq8WslGtr_OFfTyTrVerFsSB836Idpo9Mk/rs:fit:40/ar:1/aHR0cHM6Ly9hdmF0/YXJzLmVuZWJhLmdh/bWVzL2k4TmlmZU10/VmtENTRmNEZWamtX/VEdKSFpYdEN5RDIt/MzJrbFRjem8ybGMuanBlZw"}
+                      alt="Games Federation"
+                      width={35}
+                      height={35}
+                      className="w-full h-full rounded-full object-cover group-hover:opacity-80 transition-opacity"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    </div>
+                    <input
+                      id="avatar-upload"
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          const reader = new FileReader();
+                          reader.onloadend = () => {
+                            const result = reader.result as string;
+                            const newData = {
+                              ...gameData,
+                              avatarUrl: result
+                            };
+                            setGameData(newData);
+                            localStorage.setItem('gameData', JSON.stringify(newData));
+                          };
+                          reader.readAsDataURL(file);
+                        }
+                      }}
+                    />
+                  </div>
                   <div>
-                    <div className="text-[14px] font-bold text-white">Games Federation</div>
+                    <div className="text-[14px] font-bold text-white">{gameData.sellerName || 'Games Federation'}</div>
                     <div className="text-[12px] text-white/60">
                       <span className="font-bold text-[#1dbda0]">99.94%</span> of nearly 2225k+ rate as <strong className="text-white">excellent!</strong>
                     </div>
@@ -456,6 +637,9 @@ export default function RedeemLoadingFixed() {
                   type="button"
                   className="flex items-center gap-2 border-2 border-white text-white hover:bg-white/10 px-4 py-2 rounded text-[15px] font-semibold transition-all flex-shrink-0 whitespace-nowrap"
                 >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4">
+                    <path d="M13.6 12.1l-5.8-11C7.6.9 7.3.7 7 .7c-.3 0-.6.2-.7.4l-5.9 11c-.1.3-.1.6 0 .8.2.3.4.4.7.4h11.7c.3 0 .6-.2.7-.4.2-.3.2-.6.1-.8zM7 11.6c-.5 0-.8-.4-.8-.8s.3-.9.8-.9.8.4.8.8-.3.9-.8.9zm.9-3.3c0 .5-.4.8-.8.8-.5 0-.8-.4-.8-.8V4.9c0-.5.4-.8.8-.8.5 0 .8.4.8.8v3.4z"></path>
+                  </svg>
                   <span>Report a Problem</span>
                 </button>
               </div>
