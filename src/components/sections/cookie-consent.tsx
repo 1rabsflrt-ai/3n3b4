@@ -57,7 +57,7 @@ const CookieConsent: React.FC = () => {
               onClick={() => setIsVisible(false)}
               className="flex-1 bg-transparent border border-[#ffffff1a] text-white text-[14px] font-semibold py-[10px] px-6 rounded-[4px] transition-all hover:bg-white/10 active:scale-[0.98]"
             >
-              Customize
+              Reject All
             </button>
           </div>
         </div>
