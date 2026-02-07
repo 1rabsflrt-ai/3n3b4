@@ -7,7 +7,7 @@ export default function Header() {
     <header className="w-full bg-[#2a0d6e] h-[80px] flex items-center shadow-[0_2px_4px_rgba(0,0,0,0.2)] z-50 sticky top-0 px-6">
       <div className="w-full max-w-[1200px] mx-auto flex items-center justify-between">
         <div className="flex-shrink-0">
-          <a href="/es/" className="block">
+          <a href="https://www.eneba.com/" className="block">
             <Image 
               src="https://static.eneba.games/branding/v2/logoFull.svg" 
               alt="Eneba" 
@@ -36,14 +36,14 @@ export default function Header() {
                 </div>
                 <span className="text-[12px] font-medium text-white font-roboto">Payment</span>
               </div>
-              <div className="flex-grow h-[1px] mx-2 bg-gradient-to-r from-[#00d2b4] to-[#ffffff1a]"></div>
+              <div className="flex-grow h-[1px] mx-2 bg-[#00d2b4]"></div>
             </li>
             <li className="flex items-center">
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 rounded-full border border-[#00d2b4] bg-[#00d2b4] flex items-center justify-center">
                   <span className="text-[12px] font-bold text-white">3</span>
                 </div>
-                <span className="text-[12px] font-medium text-[#b9a4f1] font-roboto whitespace-nowrap font-metropolis-bold">Get your product</span>
+                <span className="text-[12px] font-medium text-[#395f9d] font-roboto whitespace-nowrap font-metropolis-bold">Get your product</span>
               </div>
             </li>
 

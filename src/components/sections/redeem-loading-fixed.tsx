@@ -9,6 +9,9 @@ interface GameData {
   imageUrl: string;
   region: string;
   avatarUrl?: string;
+  sellerName?: string;
+  sellerRating?: string;
+  sellerRatingsCount?: string;
 }
 
 interface ProductKeyModalProps {
@@ -25,7 +28,9 @@ const ProductKeyModal = ({ isOpen, onClose, initialData, onSave }: ProductKeyMod
     imageUrl: initialData.imageUrl || '',
     region: initialData.region || 'GLOBAL',
     avatarUrl: initialData.avatarUrl || 'https://imgproxy.eneba.games/p1ibztjSzYq8WslGtr_OFfTyTrVerFsSB836Idpo9Mk/rs:fit:40/ar:1/aHR0cHM6Ly9hdmF0/YXJzLmVuZWJhLmdh/bWVzL2k4TmlmZU10/VmtENTRmNEZWamtX/VEdKSFpYdEN5RDIt/MzJrbFRjem8ybGMuanBlZw',
-    sellerName: 'Games Federation'  // Add seller name field
+    sellerName: initialData.sellerName || 'Games Federation',
+    sellerRating: initialData.sellerRating || '99.94%',
+    sellerRatingsCount: initialData.sellerRatingsCount || '2225k+'
   });
   const [imagePreview, setImagePreview] = useState<string | null>(initialData.imageUrl || null);
 
@@ -33,7 +38,9 @@ const ProductKeyModal = ({ isOpen, onClose, initialData, onSave }: ProductKeyMod
     if (isOpen) {
       setFormData({
         ...initialData,
-        sellerName: initialData.sellerName || 'Games Federation'
+        sellerName: initialData.sellerName || 'Games Federation',
+        sellerRating: initialData.sellerRating || '99.94%',
+        sellerRatingsCount: initialData.sellerRatingsCount || '2225k+'
       });
       setImagePreview(initialData.imageUrl);
     }
@@ -63,7 +70,9 @@ const ProductKeyModal = ({ isOpen, onClose, initialData, onSave }: ProductKeyMod
     const dataToSave = {
       ...formData,
       imageUrl: imagePreview || formData.imageUrl,
-      sellerName: formData.sellerName || 'Games Federation'  // Ensure seller name is always set
+      sellerName: formData.sellerName || 'Games Federation',
+      sellerRating: formData.sellerRating || '99.94%',
+      sellerRatingsCount: formData.sellerRatingsCount || '2225k+'
     };
     onSave(dataToSave);
     onClose();
@@ -130,6 +139,30 @@ const ProductKeyModal = ({ isOpen, onClose, initialData, onSave }: ProductKeyMod
               placeholder="Enter seller name"
             />
           </div>
+
+          <div>
+            <label className="block text-white/80 text-sm font-medium mb-1">Seller Rating (%)</label>
+            <input
+              type="text"
+              name="sellerRating"
+              value={formData.sellerRating || '99.94%'}
+              onChange={handleInputChange}
+              className="w-full p-3 bg-[#2a0e68] text-white border border-[#4c2a8a] rounded-lg focus:ring-2 focus:ring-[#FAD318] focus:border-transparent"
+              placeholder="99.94%"
+            />
+          </div>
+
+          <div>
+            <label className="block text-white/80 text-sm font-medium mb-1">Seller Ratings Count</label>
+            <input
+              type="text"
+              name="sellerRatingsCount"
+              value={formData.sellerRatingsCount || '2225k+'}
+              onChange={handleInputChange}
+              className="w-full p-3 bg-[#2a0e68] text-white border border-[#4c2a8a] rounded-lg focus:ring-2 focus:ring-[#FAD318] focus:border-transparent"
+              placeholder="2225k+"
+            />
+          </div>
           
           {/* Кнопки управления */}
           <div className="flex justify-end gap-4 pt-6 border-t border-[#4c2a8a]/50">
@@ -189,26 +222,28 @@ export default function RedeemLoadingFixed() {
       title: "Sniper Elite 4 Steam Key",
       imageUrl: "https://cdn1.epicgames.com/offer/2bda08f9230144a19e98373cc4a6ac2d/EGS_SniperElite4_RebellionDevelopments_S1_2560x1440-6d998847b0d56222bd5dfd487227508e",
       region: "GLOBAL",
-      avatarUrl: "https://imgproxy.eneba.games/p1ibztjSzYq8WslGtr_OFfTyTrVerFsSB836Idpo9Mk/rs:fit:40/ar:1/aHR0cHM6Ly9hdmF0/YXJzLmVuZWJhLmdh/bWVzL2k4TmlmZU10/VmtENTRmNEZWamtX/VEdKSFpYdEN5RDIt/MzJrbFRjem8ybGMuanBlZw"
+      avatarUrl: "https://imgproxy.eneba.games/p1ibztjSzYq8WslGtr_OFfTyTrVerFsSB836Idpo9Mk/rs:fit:40/ar:1/aHR0cHM6Ly9hdmF0/YXJzLmVuZWJhLmdh/bWVzL2k4TmlmZU10/VmtENTRmNEZWamtX/VEdKSFpYdEN5RDIt/MzJrbFRjem8ybGMuanBlZw",
+      sellerName: "Games Federation",
+      sellerRating: "99.94%",
+      sellerRatingsCount: "2225k+"
     };
   });
 
 
   const handleSaveGameData = (newData: GameData) => {
-    // Обновляем состояние с новыми данными
-    setGameData(prevData => ({
-      ...prevData,
-      ...newData
-    }));
-    
-    // Сохраняем в localStorage
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('gameData', JSON.stringify({
-        ...gameData,
+    setGameData(prevData => {
+      const merged = {
+        ...prevData,
         ...newData
-      }));
-    }
-    
+      };
+
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('gameData', JSON.stringify(merged));
+      }
+
+      return merged;
+    });
+
     setShowKeyModal(false);
   };
 
@@ -252,15 +287,21 @@ export default function RedeemLoadingFixed() {
 
             <div className="bg-white rounded-[4px] p-4 flex items-center justify-between w-full max-w-[300px] shadow-lg relative">
               <div className="flex items-center gap-3">
-                <div className="relative w-7 h-7">
-                  <div className="absolute inset-0 border-[3px] border-[#00d2b4]/20 rounded-full"></div>
-                  <div className="absolute inset-0 border-[3px] border-[#00d2b4] border-t-transparent rounded-full animate-spin"></div>
+                <div className="relative w-7 h-7 animate-spin">
+                  <span className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#656565]"></span>
+                  <span className="absolute top-[3px] right-[3px] w-1 h-1 rounded-full bg-[#656565] opacity-90"></span>
+                  <span className="absolute top-1/2 right-0 -translate-y-1/2 w-1 h-1 rounded-full bg-[#656565] opacity-80"></span>
+                  <span className="absolute bottom-[3px] right-[3px] w-1 h-1 rounded-full bg-[#656565] opacity-70"></span>
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#656565] opacity-60"></span>
+                  <span className="absolute bottom-[3px] left-[3px] w-1 h-1 rounded-full bg-[#656565] opacity-50"></span>
+                  <span className="absolute top-1/2 left-0 -translate-y-1/2 w-1 h-1 rounded-full bg-[#656565] opacity-40"></span>
+                  <span className="absolute top-[3px] left-[3px] w-1 h-1 rounded-full bg-[#656565] opacity-30"></span>
                 </div>
                 <span className="text-[#333] text-[15px] font-medium">Verifying...</span>
               </div>
 
-              <div className="flex flex-col items-end">
-                <div className="flex items-center">
+              <div className="flex flex-col items-end w-[80px]">
+                <div className="flex items-center justify-end w-full">
                   <img 
                     src="/Cloudflare_Logo.svg" 
                     alt="Cloudflare" 
@@ -268,9 +309,9 @@ export default function RedeemLoadingFixed() {
                     style={{ minWidth: '80px' }}
                   />
                 </div>
-                <div className="flex gap-2 mt-1">
-                  <span className="text-[8px] text-[#0051c3] cursor-pointer hover:underline">Privacy</span>
-                  <span className="text-[8px] text-[#0051c3] cursor-pointer hover:underline">Terms</span>
+                <div className="flex gap-2 mt-1 justify-end w-full">
+                  <span className="text-[8px] text-[#656565] cursor-pointer hover:underline">Privacy</span>
+                  <span className="text-[8px] text-[#656565] cursor-pointer hover:underline">Terms</span>
                 </div>
               </div>
             </div>
@@ -625,7 +666,7 @@ export default function RedeemLoadingFixed() {
                   <div>
                     <div className="text-[14px] font-bold text-white">{gameData.sellerName || 'Games Federation'}</div>
                     <div className="text-[12px] text-white/60">
-                      <span className="font-bold text-[#1dbda0]">99.94%</span> of nearly 2225k+ rate as <strong className="text-white">excellent!</strong>
+                      <span className="font-bold text-[#1dbda0]">{gameData.sellerRating || '99.94%'}</span> of nearly {gameData.sellerRatingsCount || '2225k+'} rate as <strong className="text-white">excellent!</strong>
                     </div>
                     <div className="text-[12px] text-white/60">
                       <strong className="text-white">You</strong> rated as <strong className="text-white">excellent!</strong>
