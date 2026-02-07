@@ -33,14 +33,14 @@ export default function RedeemLoading() {
             <div className="bg-white rounded-[4px] p-4 flex items-center justify-between w-full max-w-[300px] shadow-lg">
               <div className="flex items-center gap-3">
                 <div className="relative w-7 h-7 animate-spin">
-                  <span className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#656565]"></span>
-                  <span className="absolute top-[3px] right-[3px] w-1 h-1 rounded-full bg-[#656565] opacity-90"></span>
-                  <span className="absolute top-1/2 right-0 -translate-y-1/2 w-1 h-1 rounded-full bg-[#656565] opacity-80"></span>
-                  <span className="absolute bottom-[3px] right-[3px] w-1 h-1 rounded-full bg-[#656565] opacity-70"></span>
-                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#656565] opacity-60"></span>
-                  <span className="absolute bottom-[3px] left-[3px] w-1 h-1 rounded-full bg-[#656565] opacity-50"></span>
-                  <span className="absolute top-1/2 left-0 -translate-y-1/2 w-1 h-1 rounded-full bg-[#656565] opacity-40"></span>
-                  <span className="absolute top-[3px] left-[3px] w-1 h-1 rounded-full bg-[#656565] opacity-30"></span>
+                  <span className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#357251]"></span>
+                  <span className="absolute top-[3px] right-[3px] w-1 h-1 rounded-full bg-[#357251] opacity-90"></span>
+                  <span className="absolute top-1/2 right-0 -translate-y-1/2 w-1 h-1 rounded-full bg-[#357251] opacity-80"></span>
+                  <span className="absolute bottom-[3px] right-[3px] w-1 h-1 rounded-full bg-[#357251] opacity-70"></span>
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#357251] opacity-60"></span>
+                  <span className="absolute bottom-[3px] left-[3px] w-1 h-1 rounded-full bg-[#357251] opacity-50"></span>
+                  <span className="absolute top-1/2 left-0 -translate-y-1/2 w-1 h-1 rounded-full bg-[#357251] opacity-40"></span>
+                  <span className="absolute top-[3px] left-[3px] w-1 h-1 rounded-full bg-[#357251] opacity-30"></span>
                 </div>
                 <span className="text-[#333] text-[15px] font-medium">Verifying...</span>
               </div>
